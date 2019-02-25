@@ -50,6 +50,7 @@ function! s:MenuController.showMenu()
         let l:m = self._current()
         call l:m.execute()
     endif
+    redraw!
 endfunction
 
 "FUNCTION: MenuController._echoPrompt() {{{1
@@ -62,7 +63,7 @@ function! s:MenuController._echoPrompt()
         let shortcuts = map(copy(self.menuItems), "v:val['shortcut']")
         let shortcuts[self.selection] = " " . split(selection)[0] . " "
 
-        echo "Menu: [" . join(shortcuts, ",") . "] (" . navHelp . " or shortcut): "
+        echo "Menu: [" . join(shortcuts, ",") . "] (" . navHelp . "/? or shortcut): "
     else
         echo "NERDTree Menu. " . navHelp . " . or the shortcuts indicated"
         echo "========================================================="
@@ -74,6 +75,15 @@ function! s:MenuController._echoPrompt()
                 echo "  " . self.menuItems[i].text
             endif
         endfor
+    endif
+endfunction
+
+"FUNCTION: MenuController._showFullText() {{{1
+function! s:MenuController._showFullText()
+    if self.isMinimal()
+        let l:text = substitute(self.menuItems[self.selection].text, '(\(.\{-}\))', '\1', 'g')
+        echo l:text."   ---> Any key to continue"
+        call getchar()
     endif
 endfunction
 
@@ -96,6 +106,8 @@ function! s:MenuController._handleKeypress(key)
         return 1
     elseif a:key == "\r" || a:key == "\n" "enter and ctrl-j
         return 1
+    elseif a:key == "?"
+        call self._showFullText()
     else
         let index = self._nextIndexFor(a:key)
         if index != -1
