@@ -50,7 +50,6 @@ function! s:MenuController.showMenu()
         let l:m = self._current()
         call l:m.execute()
     endif
-    redraw!
 endfunction
 
 "FUNCTION: MenuController._echoPrompt() {{{1
