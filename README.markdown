@@ -28,6 +28,15 @@ Then reload Vim, run `:helptags ~/.vim/bundle/nerdtree/doc/` or `:Helptags`, and
 
     apt-vim install -y https://github.com/scrooloose/nerdtree.git
 
+使用vim8的包管理器来安装：
+```sh
+$ cd ~/.vim/pack/my-plugins/start
+$ cp  ~/src/master.tar.gz  ./
+$ mkdir nerdtree
+$ tar --strip=1 -zxf master.tar.gz  -C nerdtree
+或者直接git clone :
+git clone https://github.com/scrooloose/nerdtree   ~/.vim/pack/my-plugins/start/nerdtree
+```
 F.A.Q.
 ------
 
