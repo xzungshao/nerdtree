@@ -34,7 +34,9 @@ $ cd ~/.vim/pack/my-plugins/start
 $ cp  ~/src/master.tar.gz  ./
 $ mkdir nerdtree
 $ tar --strip=1 -zxf master.tar.gz  -C nerdtree
+```
 或者直接git clone :
+```sh
 git clone https://github.com/scrooloose/nerdtree   ~/.vim/pack/my-plugins/start/nerdtree
 ```
 F.A.Q.
